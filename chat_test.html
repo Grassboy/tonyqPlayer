@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="婚禮彈幕 Player Chat Room" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="婚禮彈幕 Player Chat Room" />
+	<meta property="og:url" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:site_name" content="婚禮彈幕 Player Chat Room" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="fonts/style.css">
+	<link href="stylesheets/animate.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.firebase.com/js/client/2.1.1/firebase.js"></script>
+    <script src="http://localhost:35729/livereload.js"></script>
+	<link onerror="this.href='stylesheets/screen.css'" href="http://localhost:24680/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <!-- //開發模式下，可能需要 compass livereload 環境
+	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    -->
+	<title>婚禮彈幕 Player</title>
+</head>
+<body>
+    <form action="#">
+        <input class="msg_input" type="text" name="msg_input" autocomplete="off" placeholder="請輸入想說的話" />
+    </form>
+    <script>
+        $(function(){
+            $.when(
+                $.getScript('javascript/config.js')
+            ).then(function(){
+                var myFirebaseRef;      //Firebase 的同步連線物件
+                myFirebaseRef = new Firebase(firebase_conf.server);
+                $('form').bind('submit', function(e){
+                    e.preventDefault();
+                    var str = $('.msg_input').val();
+                    $('.msg_input').val('');
+                    if(str) {
+                        myFirebaseRef.child(firebase_conf.listen).push({
+                            msg: str
+                        }, function(error){
+                            if(error) {
+                                $('.msg_input').val(str);
+                                alert('發生了一點錯誤，訊息無法送出');
+                            }
+                        });
+                    }
+                    return false;
+                });
+                $('.msg_input').focus();
+            });
+        });
+    </script>
+</body>
+</html>
