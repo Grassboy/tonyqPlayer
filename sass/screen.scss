@@ -4,9 +4,12 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3/user-interface";
+
 body, html {
     background: black;
     color: white;
+    overflow: hidden;
 }
 .video {
     position: fixed;
@@ -14,11 +17,10 @@ body, html {
     height: 100%;
 }
 .container {
-    display: flex;
 }
 .msglist {
-    position:fixed;
-    width: 100%;
+    @include user-select(none);
+    width: 0;
     height: 100%;
 }
 /*
@@ -53,11 +55,40 @@ $screen-width: 1024px;
         0 0 $width rgba(black, $opacity),
         0 0 $width rgba(black, $opacity),
         0 0 $width rgba(black, $opacity);
+    &.nowrap {
+        width: 2048px;
+    }
 }
 .fade-left {
     left: $screen_width - ($velocity*$tick);
 }
 
+.play-icon {
+    $w: 512px; $h: 400px;
+    transition: opacity 0.3s ease-in;
+    opacity: 0.5;
+    background-image: url(../images/play.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    margin-left: -$w/2;
+    margin-top: -$h/2;
+    width: $w; height: $h;
+    left: 50%;
+    top: 50%;
+    z-index: 200;
+    filter: drop-shadow(0 0 5px black);
+    &:hover{
+        opacity: 1;
+    }
+    &.playing {
+        opacity: 0;
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+}
 
 .track-0 { top: 36px * 0; }
 .track-1 { bottom: 36px * 1; }
@@ -81,6 +112,16 @@ $screen-width: 1024px;
 .track-16 { top: 36px * 1.5; }
 .track-17 { bottom: 36px * 0.5; }
 
+$color: #FFA;
+$color-list: rgb(27,161,226) rgb(160,80,0) rgb(51,153,51) rgb(162,193,57) rgb(216,0,115) rgb(240,150,9) rgb(230,113,184) rgb(162,0,255) rgb(229,20,0) rgb(0,171,169);
+@for $i from 1 to 6 {
+    .color-#{$i} {
+        color: lighten(nth($color-list, $i), 50%);
+    }
+    .color-#{$i}.odd {
+        color: lighten(nth($color-list, $i+5), 50%);
+    }
+}
 //-------------------------------------------------
 
 .msg_input {

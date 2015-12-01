@@ -68,28 +68,27 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 7, ../sass/screen.scss */
+/* line 9, ../sass/screen.scss */
 body, html {
   background: black;
   color: white;
+  overflow: hidden;
 }
 
-/* line 11, ../sass/screen.scss */
+/* line 14, ../sass/screen.scss */
 .video {
   position: fixed;
   width: 100%;
   height: 100%;
 }
 
-/* line 16, ../sass/screen.scss */
-.container {
-  display: flex;
-}
-
-/* line 19, ../sass/screen.scss */
+/* line 21, ../sass/screen.scss */
 .msglist {
-  position: fixed;
-  width: 100%;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 0;
   height: 100%;
 }
 
@@ -99,7 +98,7 @@ v 固定每秒 108px/s
 起點相同 100%
 w 寬不同 
 */
-/* line 33, ../sass/screen.scss */
+/* line 35, ../sass/screen.scss */
 .msg {
   width: auto;
   position: absolute;
@@ -112,103 +111,188 @@ w 寬不同
   transition: left 30s linear;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.3);
 }
+/* line 58, ../sass/screen.scss */
+.msg.nowrap {
+  width: 2048px;
+}
 
-/* line 57, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 .fade-left {
   left: -3776px;
 }
 
-/* line 62, ../sass/screen.scss */
+/* line 66, ../sass/screen.scss */
+.play-icon {
+  transition: opacity 0.3s ease-in;
+  opacity: 0.5;
+  background-image: url(../images/play.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  margin-left: -256px;
+  margin-top: -200px;
+  width: 512px;
+  height: 400px;
+  left: 50%;
+  top: 50%;
+  z-index: 200;
+  filter: drop-shadow(0 0 5px black);
+}
+/* line 82, ../sass/screen.scss */
+.play-icon:hover {
+  opacity: 1;
+}
+/* line 85, ../sass/screen.scss */
+.play-icon.playing {
+  opacity: 0;
+}
+/* line 87, ../sass/screen.scss */
+.play-icon.playing:hover {
+  opacity: 0.5;
+}
+
+/* line 93, ../sass/screen.scss */
 .track-0 {
   top: 0px;
 }
 
-/* line 63, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 .track-1 {
   bottom: 36px;
 }
 
-/* line 64, ../sass/screen.scss */
+/* line 95, ../sass/screen.scss */
 .track-2 {
   top: 72px;
 }
 
-/* line 65, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 .track-3 {
   bottom: 108px;
 }
 
-/* line 66, ../sass/screen.scss */
+/* line 97, ../sass/screen.scss */
 .track-4 {
   top: 144px;
 }
 
-/* line 68, ../sass/screen.scss */
+/* line 99, ../sass/screen.scss */
 .track-10 {
   top: 18px;
 }
 
-/* line 69, ../sass/screen.scss */
+/* line 100, ../sass/screen.scss */
 .track-11 {
   bottom: 54px;
 }
 
-/* line 70, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 .track-12 {
   top: 90px;
 }
 
-/* line 71, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 .track-13 {
   bottom: 126px;
 }
 
-/* line 73, ../sass/screen.scss */
+/* line 104, ../sass/screen.scss */
 .track-5 {
   bottom: 144px;
 }
 
-/* line 74, ../sass/screen.scss */
+/* line 105, ../sass/screen.scss */
 .track-6 {
   top: 108px;
 }
 
-/* line 75, ../sass/screen.scss */
+/* line 106, ../sass/screen.scss */
 .track-7 {
   bottom: 72px;
 }
 
-/* line 76, ../sass/screen.scss */
+/* line 107, ../sass/screen.scss */
 .track-8 {
   top: 36px;
 }
 
-/* line 77, ../sass/screen.scss */
+/* line 108, ../sass/screen.scss */
 .track-9 {
   bottom: 0px;
 }
 
-/* line 79, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 .track-14 {
   top: 126px;
 }
 
-/* line 80, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 .track-15 {
   bottom: 90px;
 }
 
-/* line 81, ../sass/screen.scss */
+/* line 112, ../sass/screen.scss */
 .track-16 {
   top: 54px;
 }
 
-/* line 82, ../sass/screen.scss */
+/* line 113, ../sass/screen.scss */
 .track-17 {
   bottom: 18px;
 }
 
-/* line 86, ../sass/screen.scss */
+/* line 118, ../sass/screen.scss */
+.color-1 {
+  color: #fdfeff;
+}
+
+/* line 121, ../sass/screen.scss */
+.color-1.odd {
+  color: #fffdf9;
+}
+
+/* line 118, ../sass/screen.scss */
+.color-2 {
+  color: #ffd0a0;
+}
+
+/* line 121, ../sass/screen.scss */
+.color-2.odd {
+  color: white;
+}
+
+/* line 118, ../sass/screen.scss */
+.color-3 {
+  color: #d9f2d9;
+}
+
+/* line 121, ../sass/screen.scss */
+.color-3.odd {
+  color: white;
+}
+
+/* line 118, ../sass/screen.scss */
+.color-4 {
+  color: #fdfefb;
+}
+
+/* line 121, ../sass/screen.scss */
+.color-4.odd {
+  color: #ffe7e5;
+}
+
+/* line 118, ../sass/screen.scss */
+.color-5 {
+  color: #ffd8ed;
+}
+
+/* line 121, ../sass/screen.scss */
+.color-5.odd {
+  color: #abfffe;
+}
+
+/* line 127, ../sass/screen.scss */
 .msg_input {
   font-size: 36px;
   height: 1.2em;

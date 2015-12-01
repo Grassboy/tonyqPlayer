@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="婚禮彈幕 Player" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="婚禮彈幕 Player" />
@@ -13,17 +14,18 @@
     <link rel="stylesheet" href="fonts/style.css">
 	<link href="stylesheets/animate.css" media="screen, projection" rel="stylesheet" type="text/css" />
     <script src="https://cdn.firebase.com/js/client/2.1.1/firebase.js"></script>
-	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-    <!-- //開發模式下，可能需要 compass livereload 環境
     <script src="http://localhost:35729/livereload.js"></script>
 	<link onerror="this.href='stylesheets/screen.css'" href="http://localhost:24680/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+    <!-- //開發模式下，可能需要 compass livereload 環境
+	<link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
     -->
 	<title>婚禮彈幕 Player</title>
 </head>
 <body>
     <div class="container">
-        <video class="video" controls autoplay src="http://www.html5videoplayer.net/videos/toystory.mp4" loop="loop"></video>
+        <video class="video" src="http://www.html5videoplayer.net/videos/toystory.mp4" loop="loop"></video>
         <div class="msglist"></div>
+        <div class="play-icon"></div>
     </div>
     <script src="javascript/controller.js"></script>
 </body>

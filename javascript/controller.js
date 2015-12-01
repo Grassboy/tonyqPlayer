@@ -61,7 +61,7 @@ $.when(
         },
         addToTrack: function(item, nexttime){
             var now = (new Date()).getTime();
-            var track;
+            var track, is_odd;
             //find basic track
             track = this.isAvailableIn(this.basic_track_num, now);
 
@@ -74,22 +74,32 @@ $.when(
             //update next available time
             this.tracks[track] = (nexttime > this.tracks[track])?nexttime:this.tracks[track];
 
-            item.addClass('track-'+track).addClass('fade-left');
+            is_odd = $('track-'+track+':last').is('odd'); //確保同個 track 連續兩則訊息的顏色不同
+            item.addClass('track-'+track).addClass('fade-left').addClass('color-'+(((Math.random()*5)^0)+1));
 
         }
     };
     var trackManager = new TrackManager();
-    $('body').on('click', '.msg', function(){
-        $(this).css('left', '-400px');
-    });
     $('.msglist').bind('dblclick', function(){
         var length = ((Math.random()*50)^0)+3;
         var str = tmpstr.substr(((Math.random()*(tmpstr.length - length))^0), length);
-        var item = $('<div class="msg"></div>').text(str).appendTo('.msglist');
-        var width = item.width();
+        var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
+        item.find('span').text(str)
+        var width = item.find('span').width();
+        item.removeClass('nowrap').width(width).text(str);
         trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
     }).bind('transitionend', function(e){
         $(e.target).remove();
+    });
+    $('.play-icon').bind('click', function(){
+        var $this = $(this), video = $('video')[0];
+        if($this.is('.playing')) {
+            $this.removeClass('playing');
+            video.pause();
+        } else {
+            $this.addClass('playing');
+            video.play();
+        }
     });
     (function initFirebase(){
         var myFirebaseRef;      //Firebase 的同步連線物件
@@ -98,8 +108,10 @@ $.when(
             if(!error) {
                 myFirebaseRef.child(firebase_conf.listen).on("child_added", function(snapshot) {
                     var value = snapshot.val();
-                    var item = $('<div class="msg"></div>').text(value.msg).appendTo('.msglist');
-                    var width = item.width();
+                    var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
+                    item.find('span').text(value.msg);
+                    var width = item.find('span').width();
+                    item.removeClass('nowrap').width(width).text(value.msg);
                     trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
                 });
             }
