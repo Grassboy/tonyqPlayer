@@ -148,7 +148,7 @@ w 寬不同
   opacity: 0;
 }
 /* line 87, ../sass/screen.scss */
-.play-icon.playing:hover {
+.play-icon.playing.hover {
   opacity: 0.5;
 }
 

@@ -93,14 +93,14 @@ $.when(
     });
     $('.play-icon').bind('click', function(){
         var $this = $(this), video = $('video')[0];
-        if($this.is('.playing')) {
-            $this.removeClass('playing');
+        if($this.is('.playing.hover')) {
+            $this.removeClass('playing').removeClass('hover');
             video.pause();
+        } else if($this.is('.playing')) {
+            $this.addClass('hover');
         } else {
             $this.addClass('playing');
             video.play();
-            $this.blur();
-            video.focus();
         }
     });
     (function initFirebase(){
