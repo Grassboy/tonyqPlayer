@@ -100,6 +100,7 @@ $.when(
             $this.addClass('playing');
             video.play();
             $this.blur();
+            video.focus();
         }
     });
     (function initFirebase(){
