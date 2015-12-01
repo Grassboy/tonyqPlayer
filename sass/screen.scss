@@ -5,6 +5,7 @@
 
 @import "compass/reset";
 @import "compass/css3/user-interface";
+@import "compass/utilities/general/clearfix";
 
 body, html {
     background: black;
@@ -17,6 +18,7 @@ body, html {
     height: 100%;
 }
 .container {
+    @include clearfix;
 }
 .msglist {
     @include user-select(none);
