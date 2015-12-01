@@ -99,7 +99,7 @@ $.when(
         } else if($this.is('.playing')) {
             $this.addClass('hover');
         } else {
-            var container = $('.container')[0];
+            var container = $('body')[0];
             container.requestFullScreen && container.requestFullScreen() ||
             container.webkitRequestFullScreen && container.webkitRequestFullScreen() ||
             container.mozRequestFullScreen && container.mozRequestFullScreen();
