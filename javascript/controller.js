@@ -99,6 +99,7 @@ $.when(
         } else {
             $this.addClass('playing');
             video.play();
+            $this.blur();
         }
     });
     (function initFirebase(){
