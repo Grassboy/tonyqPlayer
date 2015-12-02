@@ -114,10 +114,18 @@ $.when(
             if(!error) {
                 myFirebaseRef.child(firebase_conf.listen).on("child_added", function(snapshot) {
                     var value = snapshot.val();
-                    var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
-                    item.find('span').text(value.msg);
-                    var width = item.find('span').width();
-                    item.removeClass('nowrap').width(width).text(value.msg);
+                    switch(value.msg) {
+                    case "#cat1": case "#cat2": case "#cat3": case "#cat4":
+                    case "#melody1": case "#melody2": case "#heart":
+                        var item = $('<div class="msg"></div>').addClass(value.msg.substr(1)).appendTo('.msglist');
+                        var width = item.width();
+                        break;
+                    default:
+                        var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
+                        item.find('span').text(value.msg);
+                        var width = item.find('span').width();
+                        item.removeClass('nowrap').width(width).text(value.msg);
+                    }
                     trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
                 });
             }

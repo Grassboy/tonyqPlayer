@@ -4,8 +4,12 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3";
 @import "compass/css3/user-interface";
 @import "compass/utilities/general/clearfix";
+@import "compass/utilities/sprites/base";
+
+$icons: sprite-map("icons/*.png");
 
 body, html {
     background: black;
@@ -20,6 +24,7 @@ body, html {
 }
 .container {
     @include clearfix;
+    height: 100%;
 }
 .msglist {
     @include user-select(none);
@@ -62,6 +67,39 @@ $screen-width: 1024px;
         width: 2048px;
     }
 }
+$icon-list: cat1 cat2 cat3 cat4 heart melody1 melody2;
+
+@include keyframes(effect1){
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2)
+    }
+}
+@include keyframes(effect2) {
+    0%,50%,100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-20deg);
+    }
+    75% {
+        transform: rotate(20deg);
+    }
+}
+
+@for $i from 1 to 6 {
+    $name: nth($icon-list, $i);
+    .#{$name} {
+        @include background(sprite($icons, $name));
+        width: 96px; height: 96px;
+        //animation: effect2 2s linear infinite;
+        animation: effect1 0.5s infinite;
+        filter: drop-shadow(0 0 3px white);
+    }
+}
+
 .fade-left {
     left: $screen_width - ($velocity*$tick);
 }
@@ -70,7 +108,7 @@ $screen-width: 1024px;
     $w: 512px; $h: 400px;
     transition: opacity 0.3s ease-in;
     opacity: 0.5;
-    background-image: url(../images/play.png);
+    background-image: url(../images/logo.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
@@ -82,6 +120,20 @@ $screen-width: 1024px;
     top: 50%;
     z-index: 200;
     filter: drop-shadow(0 0 5px black);
+    &:after {
+        opacity: 0.9;
+        width: 128px; height: 128px;
+        display: inline-block;
+        content: ' ';
+        position: absolute;
+        left: 50%; top: 50%;
+        margin-left: -64px;
+        margin-top: -64px;
+        background-image: url(../images/play.png);
+    }
+    &.playing:after {
+        background-image: url(../images/pause.png);
+    }
     &:hover{
         opacity: 1;
     }
