@@ -88,14 +88,40 @@ $icon-list: cat1 cat2 cat3 cat4 heart melody1 melody2;
         transform: rotate(20deg);
     }
 }
-
-@for $i from 1 to 6 {
+@include keyframes(effect3) {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+}
+@include keyframes(effect4) {
+    0%, 50%, 100% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 0;
+    }
+}
+.animate1 {
+    animation: effect1 0.5s infinite;
+}
+.animate2 {
+    animation: effect2 2s infinite;
+}
+.animate3 {
+    animation: effect3 0.5s infinite;
+}
+.animate4 {
+    animation: effect4 2s infinite;
+}
+@for $i from 1 to 8 {
     $name: nth($icon-list, $i);
-    .#{$name} {
+    .#{$name}, button[data-icon="#{$name}"] {
         @include background(sprite($icons, $name));
         width: 96px; height: 96px;
         //animation: effect2 2s linear infinite;
-        animation: effect1 0.5s infinite;
         filter: drop-shadow(0 0 3px white);
     }
 }

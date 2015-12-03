@@ -1,26 +1,28 @@
 $.when(
     $.getScript('javascript/config.js')
 ).then(function(){
+    var myFirebaseRef = new Firebase(firebase_conf.server);      //Firebase 的同步連線物件
     var tmpstr = `
-    現在有沒有自給自足的房子？
-    王奕凱:蔣萬安完了,賄選事證明確!
-    有沒有青眼白龍的卦
-    有沒有磁磚爆裂的八卦
-    有沒有基督教反同性戀的八卦?
-    電機系學生少思想 李嗣涔擔憂
-    噍吧哖園區揭幕 追悼義士
-    臉書私訊揪團向朱立倫討黨產 警方找上門
-    中山區復甦了嗎
-    八里雙屍案／謝依涵暫逃死刑 發回更審
-    送禮品供抽獎遭控賄選 蔣萬安發聲明喊冤
-    王奕凱:蔣萬安完了,賄選事證明確!
-    樓上太吵 大陸震樓神器治鄰居
-    台灣心臟外科權威??
-    小火鍋店的霸主!?
-    208430 + 611/28 mithralin    R: [ＦＢ] 王奕凱:蔣萬安完了,賄選事證明確!
-    【特企】哇！一堆妹呀！萬寶祿國際慈善1
-    有沒有要怎麼給亂停車的三寶教訓的八卦?
-    法官都吃哪牌油的八卦?
+請問各為獅女...該衝??還是已宣告出局...
+獅女心情不好 兩個月都不說話 我該怎麼辦
+獅女其實很透明
+獅子女友一直向我要家用電話
+沒有獅女的─MSN交談篇....求救
+如何知道獅子女孩喜歡你?
+關於獅女友的無名
+獅女友生氣了...
+獅女的態度
+獅女的愛情路
+秤男追獅女
+♀獅子女 v.s.射手男♂
+獅王們的女友星座調查結果
+獅男攻掠雙女心得
+[金星女王]獅子座是王子麵 By夏霏
+獅女必殺技
+0808 kukki192000 小女人獅子座
+每次買生日蛋糕都可以打折的貓女
+0726獅子女
+07.26 sawncp 標準獅女
     `;
     tmpstr = tmpstr.replace(/[\s]/g, '');
     var tick = 30, velocity = 160;
@@ -80,15 +82,34 @@ $.when(
         }
     };
     var trackManager = new TrackManager();
-    $('.msglist').bind('dblclick', function(){
+
+    var Logger = function(){
+        var key = 'TonyQPlayer.browser_id', group_name = 'g'+(new Date()).getTime();
+        var storage = localStorage[key] = localStorage[key] || 'b'+((Math.random()*10000000)^0);
+        this.log_path = `${firebase_conf.log}${storage}/${group_name}/`;
+        this.count = 0;
+    };
+    Logger.prototype = {
+        constructor: Logger,
+        addLog: function(type, args){
+            //type may be: init, play, pause, msg;
+            args = args || '';
+            var time = (new Date()).getTime();
+            myFirebaseRef.child(this.log_path).push({type, args, time});
+            this.count++;
+            if(this.count > 1) {
+                history.pushState(null, null, 'index.html?v='+this.log_path);
+            }
+        }
+    };
+    var logger = new Logger();
+    logger.addLog('init');
+    $('body').bind('dblclick', function(){
         var length = ((Math.random()*50)^0)+3;
         var str = tmpstr.substr(((Math.random()*(tmpstr.length - length))^0), length);
-        var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
-        item.find('span').text(str)
-        var width = item.find('span').width();
-        item.removeClass('nowrap').width(width).text(str);
-        trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
-    }).bind('transitionend', function(e){
+        handleMsg(str);
+    });
+    $('.msglist').bind('transitionend', function(e){
         $(e.target).remove();
     });
     $('.play-icon').bind('click', function(){
@@ -96,6 +117,7 @@ $.when(
         if($this.is('.playing.hover')) {
             $this.removeClass('playing').removeClass('hover');
             video.pause();
+            logger.addLog('pause');
         } else if($this.is('.playing')) {
             $this.addClass('hover');
         } else {
@@ -105,28 +127,31 @@ $.when(
             container.mozRequestFullScreen && container.mozRequestFullScreen();
             $this.addClass('playing');
             video.play();
+            logger.addLog('play');
         }
     });
+    var handleMsg = function(msg){
+        switch(msg) {
+        case "#cat1": case "#cat2": case "#cat3": case "#cat4":
+        case "#melody1": case "#melody2": case "#heart":
+            var item = $('<div class="msg"></div>').addClass(msg.substr(1)).addClass('animate'+(1+((Math.random()*4)^0))).appendTo('.msglist');
+            var width = item.width();
+            break;
+        default:
+            var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
+            item.find('span').text(msg);
+            var width = item.find('span').width();
+            item.removeClass('nowrap').width(width).text(msg);
+        }
+        trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
+        logger.addLog('msg', msg);
+    };
     (function initFirebase(){
-        var myFirebaseRef;      //Firebase 的同步連線物件
-        myFirebaseRef = new Firebase(firebase_conf.server);
         myFirebaseRef.child(firebase_conf.listen).remove(function(error){
             if(!error) {
                 myFirebaseRef.child(firebase_conf.listen).on("child_added", function(snapshot) {
                     var value = snapshot.val();
-                    switch(value.msg) {
-                    case "#cat1": case "#cat2": case "#cat3": case "#cat4":
-                    case "#melody1": case "#melody2": case "#heart":
-                        var item = $('<div class="msg"></div>').addClass(value.msg.substr(1)).appendTo('.msglist');
-                        var width = item.width();
-                        break;
-                    default:
-                        var item = $('<div class="msg nowrap"><span></span></div>').appendTo('.msglist');
-                        item.find('span').text(value.msg);
-                        var width = item.find('span').width();
-                        item.removeClass('nowrap').width(width).text(value.msg);
-                    }
-                    trackManager.addToTrack(item, (new Date()).getTime()+((width*1000/velocity)^0));
+                    handleMsg(value.msg);
                 });
             }
         });

@@ -24,6 +24,13 @@
     <form action="#">
         <input class="msg_input" type="text" name="msg_input" autocomplete="off" placeholder="請輸入想說的話" />
     </form>
+    <button class="smile" data-icon="cat1"></button>
+    <button class="smile" data-icon="cat2"></button>
+    <button class="smile" data-icon="cat3"></button>
+    <button class="smile" data-icon="cat4"></button>
+    <button class="smile" data-icon="melody1"></button>
+    <button class="smile" data-icon="melody2"></button>
+    <button class="smile" data-icon="heart"></button>
     <script>
         $(function(){
             $.when(
@@ -48,6 +55,11 @@
                     return false;
                 });
                 $('.msg_input').focus();
+            });
+            $('.smile').click(function(){
+                var $this = $(this);
+                $('.msg_input').val('#'+$this.data('icon'));
+                $('form').submit();
             });
         });
     </script>
