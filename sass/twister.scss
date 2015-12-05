@@ -1,0 +1,492 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/css3/user-interface";
+@import "compass/utilities/general/clearfix";
+@import "compass/utilities/sprites/base";
+
+$blue: lighten(#195D8D, 30%);
+$icons: sprite-map("icons/*.png");
+
+@include keyframes(home) {
+    0% {
+        transform: scale(0.5);
+    }
+    60% {
+        transform: scale(1);
+    }
+    64%, 68%, 72%, 76%, 80%, 84%, 88%, 92%, 96%, 100% {
+        transform: scale(1) rotate(-10deg);
+    }
+    62%, 66%, 70%, 74%, 78%, 82%, 86%, 90%, 94%, 98% {
+        transform: scale(1) rotate(10deg);
+    }
+}
+@include keyframes(cat1){
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100% {
+        transform: scale(1) rotate(10deg);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95% {
+        transform: scale(1) rotate(-10deg);
+    }
+    0% {
+        right: 130px; top: 470px;
+    }
+    10% { right: 600px; top: 300px; }
+    100% {
+        right: 920px; top: 0px;
+    }
+}
+@include keyframes(cat2){
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100% {
+        transform: scale(1) rotate(10deg);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95% {
+        transform: scale(1) rotate(-10deg);
+    }
+    0% {
+        right: 90px; top: 470px;
+    }
+    10% { right: 600px; top: 300px; }
+    100% {
+        right: 200px; top: 0px;
+    }
+}
+@include keyframes(cat3){
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100% {
+        transform: scale(1) rotate(10deg);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95% {
+        transform: scale(1) rotate(-10deg);
+    }
+    0% {
+        right: 50px; top: 470px;
+    }
+    10% { right: 600px; top: 300px; }
+    100% {
+        right: 200px; top: 570px;
+    }
+}
+@include keyframes(cat4){
+    0%,10%,20%,30%,40%,50%,60%,70%,80%,90%,100% {
+        transform: scale(1) rotate(10deg);
+    }
+    5%,15%,25%,35%,45%,55%,65%,75%,85%,95% {
+        transform: scale(1) rotate(-10deg);
+    }
+    0% {
+        right: 10px; top: 470px;
+    }
+    10% { right: 600px; top: 300px; }
+    100% {
+        right: 920px; top: 570px;
+    }
+}
+@include keyframes(catjump1) {
+  0%,50%,100% {
+    transform: scale(0.5) rotate(-10deg);
+  }
+  25%,75% {
+    transform: scale(0.5) rotate(10deg);
+  }
+  0%,25%,50%,75%,100% {
+    margin-top: 0;
+  }
+  13% {
+    margin-top: -30px;
+  }
+}
+@include keyframes(catjump2) {
+  0%,50%,100% {
+    transform: scale(0.5) rotate(-10deg);
+  }
+  25%,75% {
+    transform: scale(0.5) rotate(10deg);
+  }
+  0%,25%,50%,75%,100% {
+    margin-top: 0;
+  }
+  37% {
+    margin-top: -30px;
+  }
+}
+@include keyframes(catjump3) {
+  0%,50%,100% {
+    transform: scale(0.5) rotate(-10deg);
+  }
+  25%,75% {
+    transform: scale(0.5) rotate(10deg);
+  }
+  0%,25%,50%,75%,100% {
+    margin-top: 0;
+  }
+  63% {
+    margin-top: -30px;
+  }
+}
+@include keyframes(catjump4) {
+  0%,50%,100% {
+    transform: scale(0.5) rotate(-10deg);
+  }
+  25%,75% {
+    transform: scale(0.5) rotate(10deg);
+  }
+  0%,25%,50%,75%,100% {
+    margin-top: 0;
+  }
+  88% {
+    margin-top: -30px;
+  }
+}
+@include keyframes(bgmove) {
+  0% {
+    background-position: 0 0, 60px 60px;
+  }
+  100% {
+    background-position: -60px -60px, 0 0;
+  }
+}
+@include keyframes(logo) {
+    0%,50%,100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+@include keyframes(opacity1){
+    0%, 50%, 100% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+}
+@include keyframes(opacity2){
+    0%, 50%, 100% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+}
+@include keyframes(font_color_flip){
+    0%, 50% {
+        color: white;
+    }
+    51%, 100% {
+        color: lighten(cyan,30%);
+    }
+}
+* {
+    @include user-select(none);
+}
+body, html {
+    color: black;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    background-image: linear-gradient(45deg, $blue 25%, transparent 25%, transparent 75%, $blue 75%, $blue), linear-gradient(45deg, $blue 25%, transparent 25%, transparent 75%, $blue 75%, $blue);
+    background-size:120px 120px;
+    background-position:0 0, 60px 60px;
+    animation: bgmove 1s linear infinite;
+}
+.title {
+    font-family: 'simhei', '微軟正黑體';
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    font-size: 40px;
+    animation: font_color_flip 0.3s linear infinite;
+    $border_color: navy;
+    $border_width: 2px;
+    font-size: 40px;
+    margin: 10px;
+    text-shadow: 
+        0 0 10px navy,
+        1px 1px 0 $border_color, -1px 1px 0 $border_color, 1px -1px 0 $border_color, -1px -1px 0 $border_color;
+    line-height: 4em;
+}
+.container {
+    width:1024px;
+    height: 768px;
+    position: relative;
+}
+.logo {
+    $w: 350px;
+    background-image: url('../images/logo3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 bottom;
+    width: $w; height: $w;
+    position: absolute;
+    z-index: 0;
+    right: 0; bottom: 25px;
+    animation: logo 2s linear infinite;
+}
+.logo2 {
+    background-image: url('../images/title.png');
+    background-size: contain;
+    $w: 208px; $h: 297px; $z: 0.8;
+    width: $w*$z; height: $h*$z;
+    position: absolute;
+    right: 20px; top: 0;
+    box-shadow: 0 0 3px rgba(black, 0.6);
+}
+.slot {
+    transition: transform 0.5s ease-in;
+    background-image: url('../images/home.png');
+    background-size: contain;
+    $w: 256px; $h: 256px; $z: 1;
+    width: $w*$z; height: $h*$z;
+    position: absolute;
+    right: 0px; top: 260px;
+    transform-origin: right bottom;
+    transform: scale(0.5);
+    &:before {
+        width: 100px; 
+        position: absolute;
+        left: -70px; top: -40px;
+        background: white;
+        content: 'GO!';
+        font-size: 50px;
+        font-family: 'Fredoka One', cursive;
+        padding: 20px;
+        border-radius: 100%;
+        box-shadow: 0 0 3px black;
+    }
+    &:after {
+        width: 40px; height: 30px;
+        position: absolute;
+        left: -30px; top: 70px;
+        background: white;
+        content: ' ';
+        font-size: 10px;
+        border-radius: 100%;
+        box-shadow: 0 0 3px black;
+    }
+    .touchstart & {
+        animation: home 5s linear 1 forwards;
+    }
+}
+.cat {
+    width: 96px; height: 96px;
+    position: absolute;
+    transform: scale(0.5);
+    top: 470px;
+    z-index: 20;
+    $sx0: 270px; $sx: 186px;
+    $sy0: 20px; $sy: 170px;
+    &[data-pos] {
+        animation: none;
+        transform: scale(1);
+    }
+    &[data-pos="1"] {
+        right: $sx0 + $sx*0;
+        top: $sy0 + $sy*0;
+    }
+    &[data-pos="2"] {
+        right: $sx0 + $sx*1;
+        top: $sy0 + $sy*0;
+    }
+    &[data-pos="3"] {
+        right: $sx0 + $sx*2;
+        top: $sy0 + $sy*0;
+    }
+    &[data-pos="4"] {
+        right: $sx0 + $sx*3;
+        top: $sy0 + $sy*0;
+    }
+    &[data-pos="5"] {
+        right: $sx0 + $sx*0;
+        top: $sy0 + $sy*1;
+    }
+    &[data-pos="6"] {
+        right: $sx0 + $sx*1;
+        top: $sy0 + $sy*1;
+    }
+    &[data-pos="7"] {
+        right: $sx0 + $sx*2;
+        top: $sy0 + $sy*1;
+    }
+    &[data-pos="8"] {
+        right: $sx0 + $sx*3;
+        top: $sy0 + $sy*1;
+    }
+    &[data-pos="9"] {
+        right: $sx0 + $sx*0;
+        top: $sy0 + $sy*2;
+    }
+    &[data-pos="10"] {
+        right: $sx0 + $sx*1;
+        top: $sy0 + $sy*2;
+    }
+    &[data-pos="11"] {
+        right: $sx0 + $sx*2;
+        top: $sy0 + $sy*2;
+    }
+    &[data-pos="12"] {
+        right: $sx0 + $sx*3;
+        top: $sy0 + $sy*2;
+    }
+    &[data-pos="13"] {
+        right: $sx0 + $sx*0;
+        top: $sy0 + $sy*3;
+    }
+    &[data-pos="14"] {
+        right: $sx0 + $sx*1;
+        top: $sy0 + $sy*3;
+    }
+    &[data-pos="15"] {
+        right: $sx0 + $sx*2;
+        top: $sy0 + $sy*3;
+    }
+    &[data-pos="16"] {
+        right: $sx0 + $sx*3;
+        top: $sy0 + $sy*3;
+    }
+    .drawend &[data-what]:after {
+        transition: opacity 0.3s ease-in 0.5s;
+        content: attr(data-what);
+        position:absolute;
+        background: rgba(white, 0.8);
+        border-radius: 30px;
+        padding: 3px;
+        font-size:36px;
+        width: 4em;
+        text-align: center;
+        text-shadow: 0 0 3px white;
+        display: inline-block;
+        font-family: simhei, '微軟正黑體';
+        left: 50%;
+        margin-left: -2em;
+        top: 80%;
+    }
+    &.active {
+        z-index: 100;
+    }
+}
+.cat1 {
+    @include background(sprite($icons, cat1));
+    right: 130px;
+    animation: catjump1 3s linear infinite;
+    .touchstart & {
+        animation: cat1 5s linear 1 forwards;
+    }
+}
+.cat2 {
+    @include background(sprite($icons, cat2));
+    right: 90px;
+    animation: catjump2 3s linear infinite;
+    .touchstart & {
+        animation: cat2 5s linear 1 forwards;
+    }
+}
+.cat3 {
+    @include background(sprite($icons, cat3));
+    right: 50px;
+    animation: catjump3 3s linear infinite;
+    .touchstart & {
+        animation: cat3 5s linear 1 forwards;
+    }
+}
+.cat4 {
+    @include background(sprite($icons, cat4));
+    right: 10px;
+    animation: catjump4 3s linear infinite;
+    .touchstart & {
+        animation: cat4 5s linear 1 forwards;
+    }
+}
+.board {
+    $w: 768px; $h: 600px;
+    position: absolute;
+    width: $w; height: $h;
+    left: 32px; top: 50%;
+    margin-top: $h/-2 - 48px;
+    text-align: center;
+    background: rgba(white, 0.7);
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(gray,0.3) inset;
+    border: 2px solid white;
+}
+.item {
+    transition: transform 0.2s ease-in;
+    $w: 130px;
+    display: inline-block;
+    width: $w; height: $w;
+    border-radius: 100%;
+    margin: 8px 20px;
+    position: relative;
+    border: 2px solid black;
+    $color-list: rgb(27,161,226) rgb(160,80,0) rgb(51,153,51) rgb(162,193,57) rgb(216,0,115) rgb(240,150,9) rgb(230,113,184) rgb(162,0,255) rgb(229,20,0) rgb(0,171,169);
+    &:hover,&.here {
+        transition: none;
+        transform: scale(1.2);
+    }
+    &:after {
+        font-family: 'Fredoka One', cursive;
+        color: white;
+        position: absolute;
+        font-size: 80px;
+        line-height: $w;
+        width: $w; height: $w;
+        text-align: center;
+        display: inline-block;
+        left:0; top: 0;
+        text-shadow: 0 -2px 0 black;
+        //content: attr(data-pos)!important;
+    }
+    &:nth-child(n) {
+        background: nth($color-list, 5);
+        $color: darken(purple, 20%);
+        box-shadow: 
+            0 0 30px $color inset,
+            0 0 10px $color inset
+            ;
+    }
+    &:nth-child(n+5) {
+        background: nth($color-list, 4);
+        $color: darken(green, 20%);
+        box-shadow: 
+            0 0 30px $color inset,
+            0 0 10px $color inset
+            ;
+    }
+    &:nth-child(n+9) {
+        background: darken(yellow, 10%);
+        $color: darken(orange, 20%);
+        box-shadow: 
+            0 0 30px $color inset,
+            0 0 10px $color inset
+            ;
+    }
+    &:nth-child(n+13) {
+        background: nth($color-list, 9);
+        $color: darken(red, 20%);
+        box-shadow: 
+            0 0 30px $color inset,
+            0 0 10px $color inset
+            ;
+    }
+    &:nth-child(4n+1):after {
+        content: '1';
+    }
+    &:nth-child(4n+2):after {
+        content: '2';
+    }
+    &:nth-child(4n+3):after {
+        content: '3';
+    }
+    &:nth-child(4n+4):after {
+        content: '4';
+    }
+}

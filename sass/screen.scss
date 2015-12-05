@@ -22,6 +22,14 @@ body, html {
     width: 100%;
     height: 100%;
 }
+.link {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    line-height: 36px;
+    animation: effect4 2s infinite;
+    
+}
 .container {
     @include clearfix;
     height: 100%;
@@ -171,26 +179,26 @@ $icon-list: cat1 cat2 cat3 cat4 heart melody1 melody2;
     }
 }
 
-.track-0 { top: 36px * 0; }
+.track-0 { top: 36px * 1; }
 .track-1 { bottom: 36px * 1; }
-.track-2 { top: 36px * 2; }
+.track-2 { top: 36px * 3; }
 .track-3 { bottom: 36px * 3; }
-.track-4 { top: 36px * 4; }
+.track-4 { top: 36px * 5; }
 
-.track-10 { top: 36px * 0.5; }
+.track-10 { top: 36px * 1.5; }
 .track-11 { bottom: 36px * 1.5; }
-.track-12 { top: 36px * 2.5; }
+.track-12 { top: 36px * 3.5; }
 .track-13 { bottom: 36px * 3.5; }
 
 .track-5 { bottom: 36px * 4; }
-.track-6 { top: 36px * 3; }
+.track-6 { top: 36px * 4; }
 .track-7 { bottom: 36px * 2; }
-.track-8 { top: 36px * 1; }
+.track-8 { top: 36px * 2; }
 .track-9 { bottom: 36px * 0; }
 
-.track-14 { top: 36px * 3.5; }
+.track-14 { top: 36px * 4.5; }
 .track-15 { bottom: 36px * 2.5; }
-.track-16 { top: 36px * 1.5; }
+.track-16 { top: 36px * 2.5; }
 .track-17 { bottom: 36px * 0.5; }
 
 $color: #FFA;
